@@ -260,7 +260,7 @@
 }
 
 /* The base layer is the low-precedence global default so components/utilities can override when needed */
-@layer base {  
+@layer base {
   * {
     @apply border-border outline-ring/50;
     min-width: 0; /* Flex shrink fix (horizontal) */
@@ -271,7 +271,7 @@
     @apply bg-foreground text-background;
   }
   html {
-    @apply bg-background text-foreground;    
+    @apply bg-background text-foreground;
     @apply scroll-smooth; /* Smooth scrolling everywhere */
     height: 100%;
     overflow-y: scroll; /* Force scrollbar to prevent layout shift; makes html the scroll container for sticky */

@@ -1,29 +1,26 @@
-  @keyframes hapticPulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0.98);
-    }
-    100% {
-      transform: scale(1);
-    }
+@keyframes hapticPulse {
+  0% {
+    transform: scale(1);
   }
-  
-  @keyframes iosRipple {
-    0% {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    50% {
-      opacity: 0.3;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: scale(1.2);
-    }
+  50% {
+    transform: scale(0.98);
   }
-  
+  100% {
+    transform: scale(1);
+  }
+}
 
-  
+@keyframes iosRipple {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
