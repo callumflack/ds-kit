@@ -10,6 +10,7 @@ For a fresh Next.js app:
 4. Install the runtime dependencies listed in `references/dependencies.md`.
 5. Verify that Tailwind 4, `@theme inline`, and the shared `cn` helper are wired up.
 6. Start with `Text` and `Button`; add the wider field/control system later if needed.
+7. Run `pnpm install && pnpm run check` for Biome (lint/format). Copy `biome.json` when consuming.
 
 Expected follow-up adaptation points:
 

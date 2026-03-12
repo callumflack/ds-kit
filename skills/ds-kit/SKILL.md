@@ -20,6 +20,7 @@ If that path is missing, ask the user for the canonical kit location before proc
 Current V1 runtime install set:
 
 - `.vscode/settings.json` — suppresses "Unknown at rule" for Tailwind directives (`@apply`, `@theme`, `@source`, etc.)
+- `biome.json` — Biome config with `css.parser.tailwindDirectives` and Tailwind at-rule ignores (optional; requires `package.json` + `@biomejs/biome`)
 - `styles/vars.css`
 - `styles/index.css`
 - `styles/animations.css`

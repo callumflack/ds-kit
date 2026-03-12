@@ -1,5 +1,7 @@
 # Dependencies
 
+**Dev (ds-kit repo only):** `@biomejs/biome` — lint/format. See `biome.json` for Tailwind-aware config.
+
 These copied files currently assume:
 
 - React
