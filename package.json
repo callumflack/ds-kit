@@ -1,0 +1,11 @@
+{
+  "name": "ds-kit",
+  "private": true,
+  "devDependencies": {
+    "@biomejs/biome": "2.4.6"
+  },
+  "scripts": {
+    "check": "biome check .",
+    "format": "biome format --write ."
+  }
+}
