@@ -41,39 +41,30 @@ You can pull ds-kit components into any repo with the shadcn registry.
 
 2) Team setup (recommended):
 
-Create `components.json` once in your target repo:
+Do this once in the target repo:
+
+- `npx shadcn@latest init` (or configure at: `https://ui.shadcn.com/create` to get a custom install)
+- Then add this one block inside the existing file (don’t guess the rest):
 
 ```json
-{
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "aliases": {
+  "registries": {
     "@ds-kit": "https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/{name}.json"
   }
-}
 ```
 
-Then install from the short alias:
+Then install:
 
 `npx shadcn@latest add @ds-kit/core`
-
-If you want this to be a 1-command setup, run this from the target repo:
-
-```sh
-cat > components.json <<'EOF'
-{
-  "$schema": "https://ui.shadcn.com/schema.json",
-  "aliases": {
-    "@ds-kit": "https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/{name}.json"
-  }
-}
-EOF
-```
 
 What to install:
 - `core` is the current shipped registry item, so use `@ds-kit/core`.
 
 Need more components later? Add new registry items and consume them as:
 `npx shadcn@latest add @ds-kit/<item-name>`.
+
+Tailwind v4 note:
+- If your project is on Tailwind v4 (no `tailwind.config` file), `init` already sets `tailwind.config` to `""`.
+- If your project uses v3 config, point that field at `tailwind.config.js` or `tailwind.config.ts`.
 
 ## Framework starter command
 
