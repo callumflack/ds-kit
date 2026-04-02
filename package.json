@@ -5,6 +5,7 @@
     "@biomejs/biome": "2.4.6"
   },
   "scripts": {
+    "registry:build": "npx shadcn@latest build",
     "check": "biome check .",
     "format": "biome format --write ."
   }

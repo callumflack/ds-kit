@@ -1,0 +1,91 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ds-kit",
+  "homepage": "https://github.com/callumflack/ds-kit",
+  "items": [
+    {
+      "name": "core",
+      "type": "registry:block",
+      "title": "DS Kit Core",
+      "description": "Install the full ds-kit runtime (styles, utilities, typography, buttons, and shared elements).",
+      "files": [
+        {
+          "path": "styles/vars.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "styles/utils.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "styles/index.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "styles/animations.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "lib/classes.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "components/typography/control-states.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "components/typography/field.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/typography/text.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/ui/button-base.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/ui/button.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "components/elements/confirm-action.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/elements/dot-pattern.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/elements/external-link.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/elements/page-loading-state.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/elements/sliding-tabs.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/elements/spinner.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/elements/svg.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "components/elements/button-loading.tsx",
+          "type": "registry:component"
+        }
+      ]
+    }
+  ]
+}
