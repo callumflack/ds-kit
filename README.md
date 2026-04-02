@@ -31,6 +31,50 @@ Use this repo as the source of truth for the shared foundation.
 
 The goal is local ownership in each consuming repo without losing a clear canonical source.
 
+## Install this registry in another repo
+
+You can pull ds-kit components into any repo with the shadcn registry.
+
+1) Zero setup (works everywhere):
+
+`npx shadcn@latest add https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/core.json`
+
+2) Team setup (recommended):
+
+Create `components.json` once in your target repo:
+
+```json
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "aliases": {
+    "@ds-kit": "https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/{name}.json"
+  }
+}
+```
+
+Then install from the short alias:
+
+`npx shadcn@latest add @ds-kit/core`
+
+If you want this to be a 1-command setup, run this from the target repo:
+
+```sh
+cat > components.json <<'EOF'
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "aliases": {
+    "@ds-kit": "https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/{name}.json"
+  }
+}
+EOF
+```
+
+What to install:
+- `core` is the current shipped registry item, so use `@ds-kit/core`.
+
+Need more components later? Add new registry items and consume them as:
+`npx shadcn@latest add @ds-kit/<item-name>`.
+
 ## Framework starter command
 
 Usually I use [next.js](https://nextjs.org/docs/app/api-reference/cli/create-next-app):
