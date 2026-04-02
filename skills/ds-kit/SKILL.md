@@ -15,6 +15,38 @@ Default source path:
 
 If that path is missing, ask the user for the canonical kit location before proceeding.
 
+## Install shadcn
+
+[Shadcn](https://ui.shadcn.com/docs/installation) using Base UI MUST be installed:
+
+Run `pnpm dlx shadcn@latest init --preset b0 --base base --template next`
+
+## Install these skills
+
+These skills MUST be installed:
+
+- npx skills add https://github.com/vercel-labs/skills --skill find-skills
+- npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices
+- npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-composition-patterns
+- npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines
+- pnpm dlx skills add shadcn/ui
+
+Then you MUST ask the user if they also wish to install:
+
+- npx skills add https://github.com/vercel-labs/agent-eval --skill frontend-design
+- npx skills add https://github.com/vercel-labs/agent-browser --skill agent-browser
+- npx skills add https://github.com/vercel-labs/before-and-after --skill before-and-after
+- npx skills add https://github.com/vercel-labs/agent-browser --skill dogfood
+- npx skills add vercel-labs/next-skills
+
+## Install agentation
+
+Ask the user if they wish ti install Agentation.
+
+Agentation enables inline coversations with UI elements. 
+
+Read: https://www.agentation.com/install
+
 ## Scope
 
 Current V1 runtime install set:

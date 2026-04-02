@@ -30,3 +30,13 @@ Use this repo as the source of truth for the shared foundation.
 - Keep app-specific branding local unless it proves durable enough to promote back here.
 
 The goal is local ownership in each consuming repo without losing a clear canonical source.
+
+## Framework starter command
+
+Usually I use [next.js](https://nextjs.org/docs/app/api-reference/cli/create-next-app):
+
+`pnpm create next-app --example "https://github.com/.../" [your-project-name]`
+
+This command is the current goto:
+
+`pnpm create next-app [project-name] --biome --src-dir --use-pnpm --agents-md`
