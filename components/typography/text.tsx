@@ -1,17 +1,17 @@
-import { cn } from "@/lib/utils"
+import type { VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import {
   Children,
   type ComponentPropsWithoutRef,
-  type ElementType,
   cloneElement,
+  type ElementType,
   isValidElement,
   type ReactNode,
-} from "react"
-import type { VariantProps } from "class-variance-authority"
-import { cva } from "class-variance-authority"
+} from "react";
+import { cn } from "@/lib/utils";
 
-const eyebrowStyle =
-  "subpixel-antialiased uppercase leading-none tracking-[0.05em]"
+const eyebrowStyle = "subpixel-antialiased uppercase leading-none tracking-[0.05em]";
+const labelStyle = "uppercase leading-none tracking-[0.02em]";
 
 export const textVariants = cva(
   [
@@ -26,7 +26,8 @@ export const textVariants = cva(
         light: "font-light",
         normal: "font-normal",
         medium: "font-medium",
-        semi: "font-semibold",
+        // purposefully set to medium. We do not allow any other weights!
+        semi: "font-medium",
         bold: "font-bold",
       },
       align: {
@@ -38,8 +39,9 @@ export const textVariants = cva(
         background: "text-background",
         foreground: "text-foreground",
         foregroundDim: "text-foreground-dim",
+        foregroundMuted: "text-foreground-muted",
         primary: "text-primary",
-        secondary: "text-secondary",
+        highlight: "text-highlight",
         muted: "text-muted",
         mutedForeground: "text-muted-foreground",
         accent: "text-accent",
@@ -55,18 +57,19 @@ export const textVariants = cva(
         pill: ["text-pill subpixel-antialiased"],
         pillEyebrow: ["text-pill", eyebrowStyle],
         fine: "text-fine",
-        eyebrow: ["text-fine", eyebrowStyle],      
+        eyebrow: ["text-fine", eyebrowStyle],
+        label: ["text-small font-medium", labelStyle],
         small: "text-small",
         compact: "text-compact",
         body: "text-body",
-        button: "text-button",        
-        large: "text-large",        
+        button: "text-button",
+        large: "text-large",
         xlarge: "text-xlarge",
         heading: "text-heading",
         subtitle: "text-subtitle text-balance",
-        title: "text-title text-balance font-[450]",
-        display: "text-display text-balance font-[450]",
-        hero: "text-hero text-balance font-[450]",
+        title: "text-title text-balance font-medium",
+        display: "text-display text-balance font-medium -ml-[0.015em]",
+        hero: "text-hero text-balance font-medium -ml-[0.0175em]",
       },
       // opsz 32 matches Inter's static Display font
       optical: {
@@ -77,21 +80,16 @@ export const textVariants = cva(
         // style specified in utils.css
         default: "link",
       },
-      dim: {
-        // TODO: consider using Color Mix for these so they relate back to the currentColor used
-        true: "text-foreground-dim",
-      },
-      muted: {
-        true: "text-foreground-muted",
-      },
       caps: {
         true: "uppercase",
       },
       inline: {
         true: "leading-none",
       },
-      balance: {
-        true: "text-balance",
+      wrap: {
+        normal: "",
+        balanced: "text-balance",
+        pretty: "text-pretty",
       },
       mono: {
         true: "font-mono",
@@ -134,8 +132,8 @@ export const textVariants = cva(
     compoundVariants: [
       // mono displays
       {
-        intent: ["heading", "subtitle", "title", "display", "hero"],
         mono: true,
+        intent: ["heading", "subtitle", "title", "display", "hero"],
         className: "tracking-[0.0125em]",
       },
       // mono
@@ -157,7 +155,7 @@ export const textVariants = cva(
       },
       {
         withIcon: true,
-        intent: ["pillEyebrow", "pill", "fine", "small"],
+        intent: ["pillEyebrow", "pill", "fine", "small", "label"],
         className: "gap-0.75",
       },
       {
@@ -172,19 +170,17 @@ export const textVariants = cva(
       weight: "normal",
       optical: "auto",
     },
-  }
-)
+  },
+);
 
-type TextIntent = NonNullable<VariantProps<typeof textVariants>["intent"]>
-const displayIntents = new Set<TextIntent>(["title", "display", "hero"])
+type TextIntent = NonNullable<VariantProps<typeof textVariants>["intent"]>;
+const displayIntents = new Set<TextIntent>(["title", "display", "hero"]);
 
-export type TextProps<T extends ElementType = "div"> = VariantProps<
-  typeof textVariants
-> &
+export type TextProps<T extends ElementType = "div"> = VariantProps<typeof textVariants> &
   Omit<ComponentPropsWithoutRef<T>, "color"> & {
-    as?: T
-    children: ReactNode
-  }
+    as?: T;
+    children: ReactNode;
+  };
 
 export const Text = <T extends ElementType = "div">({
   as: Component,
@@ -196,52 +192,51 @@ export const Text = <T extends ElementType = "div">({
   caps,
   inline,
   mono,
-  balance,
+  wrap = "normal",
   optical,
   truncate,
   bullet,
   textBox,
   pre,
   link,
-  dim,
-  muted,
   withIcon,
   children,
   ...props
 }: TextProps<T>) => {
-  const ResolvedComponent = Component ?? "div"
-  const bulletProp = ResolvedComponent === "li" ? (bullet ?? false) : bullet
-  const preProp = ResolvedComponent === "pre" ? true : pre
-  const linkProp = ResolvedComponent === "a" ? (link ?? "default") : link
+  const ResolvedComponent = Component ?? "div";
+  const bulletProp = ResolvedComponent === "li" ? (bullet ?? false) : bullet;
+  const preProp = ResolvedComponent === "pre" ? true : pre;
+  const linkProp = ResolvedComponent === "a" ? (link ?? "default") : link;
   const resolvedOptical =
-    optical ?? (displayIntents.has(intent ?? "body") ? "display" : "auto")
+    optical ?? (displayIntents.has(intent ?? "body") ? "display" : "auto");
 
   const formattedChildren: React.ReactNode =
-    typeof children === "string" ? formatText(children) : children
+    typeof children === "string" ? formatText(children) : children;
 
   // text-overflow: ellipsis doesn't work on flex containers, so when both
   // withIcon (flex) and truncate are active, we wrap text children in a
   // <span class="truncate"> and only apply overflow-hidden on the outer.
-  const needsTruncateWrap = !!(withIcon && truncate)
+  const needsTruncateWrap = !!(withIcon && truncate);
 
-  let renderedChildren: React.ReactNode = formattedChildren
+  let renderedChildren: React.ReactNode = formattedChildren;
   if (needsTruncateWrap) {
-    renderedChildren = Children.map(formattedChildren, child => {
+    renderedChildren = Children.map(formattedChildren, (child) => {
       if (isValidElement(child)) {
-        const existing = (child.props as { className?: string }).className ?? ""
+        const existing = (child.props as { className?: string }).className ?? "";
         if (!existing.includes("shrink-0")) {
           return cloneElement(child, {
             className: cn(existing, "shrink-0"),
-          } as Record<string, unknown>)
+          } as Record<string, unknown>);
         }
-        return child
+        return child;
       }
-      return <span className="truncate min-w-0">{child}</span>
-    })
+      return <span className="truncate min-w-0">{child}</span>;
+    });
   }
 
   return (
     <ResolvedComponent
+      data-slot="text"
       data-component="text"
       className={cn(
         textVariants({
@@ -252,7 +247,7 @@ export const Text = <T extends ElementType = "div">({
           caps,
           inline,
           mono,
-          balance,
+          wrap,
           optical: resolvedOptical,
           truncate,
           pre: preProp,
@@ -260,26 +255,33 @@ export const Text = <T extends ElementType = "div">({
           textBox,
           link: linkProp,
           withIcon,
-          dim,
-          muted,
           className,
         }),
-        needsTruncateWrap && "overflow-hidden min-w-0 max-w-full w-max"
+        needsTruncateWrap && "overflow-hidden min-w-0 max-w-full w-max",
         // Component === "ul" ? "pl-bullet" : ""
       )}
       {...props}
     >
       {renderedChildren}
     </ResolvedComponent>
-  )
-}
+  );
+};
 
 // Doubles: &ldquo; &rdquo;  “ ” "Pretty"
 // Singles: &lsquo; &rsquo; ’ ‘ 'Pretty'
 function formatText(text: string): string {
+  let singleOpen = true;
+  let doubleOpen = true;
+
   return text
-    .replace(/'/g, "\u2019") // Left single quote (&lsquo; or '\u2019')
-    .replace(/'/g, "\u2018") // Right single quote (&rsquo; or '\u2018')
-    .replace(/"/g, "\u201C") // Left double quote (&ldquo; or '\u201C')
-    .replace(/"/g, "\u201D") // Right double quote (&rdquo; or '\u201D')
+    .replace(/"/g, () => {
+      const quote = doubleOpen ? "\u201C" : "\u201D";
+      doubleOpen = !doubleOpen;
+      return quote;
+    })
+    .replace(/'/g, () => {
+      const quote = singleOpen ? "\u2018" : "\u2019";
+      singleOpen = !singleOpen;
+      return quote;
+    });
 }
