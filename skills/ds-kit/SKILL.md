@@ -1,67 +1,27 @@
 ---
 name: ds-kit
-description: Install, audit, and extend Callum's copy-first design-system kit in React, Next.js, or Tailwind apps. Use whenever the user wants to set up the shared design-system foundation, copy in `vars.css`/`index.css`/`classes.ts`, install `Text` and the customized `Button`, sync a repo with the canonical ds-kit source, or add semantic tokens/variants that must stay aligned across CSS, Tailwind aliases, and class merging.
+description: Install and audit ds-kit in a consuming app via the shadcn registry. Use when the user wants `@ds-kit/core` added to another repo, needs the registry install verified, or wants to check that a consuming app still matches the ds-kit contract.
 ---
 
 # DS Kit
 
-Use this skill to apply the canonical design-system kit from its source repo into the current app, then keep the copied foundation consistent over time.
+Use this skill in a consuming repo, not in the ds-kit source repo.
 
-## Canonical source
+If the work is about `registry.json`, `public/r/*.json`, publishing, or fixing the source registry itself, use `.agents/skills/ds-kit-registry-guardian/SKILL.md` instead.
 
-Default source path:
+Keep this file lean. Use bundled references and scripts:
 
-- `/Users/cflack/Repos/callumflack/ds-kit`
-
-If that path is missing, ask the user for the canonical kit location before proceeding.
-
-## Install shadcn
-
-[Shadcn](https://ui.shadcn.com/docs/installation) using Base UI MUST be installed:
-
-Run `pnpm dlx shadcn@latest init --preset b0 --base base --template next`
-
-## Install these skills
-
-These skills MUST be installed:
-
-- npx skills add https://github.com/vercel-labs/skills --skill find-skills
-- npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-react-best-practices
-- npx skills add https://github.com/vercel-labs/agent-skills --skill vercel-composition-patterns
-- npx skills add https://github.com/vercel-labs/agent-skills --skill web-design-guidelines
-- pnpm dlx skills add shadcn/ui
-
-Then you MUST ask the user if they also wish to install:
-
-- npx skills add https://github.com/vercel-labs/agent-eval --skill frontend-design
-- npx skills add https://github.com/vercel-labs/agent-browser --skill agent-browser
-- npx skills add https://github.com/vercel-labs/before-and-after --skill before-and-after
-- npx skills add https://github.com/vercel-labs/agent-browser --skill dogfood
-- npx skills add vercel-labs/next-skills
-
-## Install agentation
-
-Ask the user if they wish ti install Agentation.
-
-Agentation enables inline coversations with UI elements. 
-
-Read: https://www.agentation.com/install
+- `references/install.md`
+- `references/contract.md`
+- `references/install-assumptions.md`
+- `scripts/post-add-ds-kit.mjs`
+- `scripts/verify-install.mjs`
 
 ## Scope
 
-Current V1 runtime install set:
+Current install target:
 
-- `.vscode/settings.json` — suppresses "Unknown at rule" for Tailwind directives (`@apply`, `@theme`, `@source`, etc.)
-- `biome.json` — Biome config with `css.parser.tailwindDirectives` and Tailwind at-rule ignores (optional; requires `package.json` + `@biomejs/biome`)
-- `styles/vars.css`
-- `styles/index.css`
-- `styles/animations.css`
-- `styles/utils.css`
-- `lib/classes.ts`
-- `lib/utils.ts`
-- `components/typography/text.tsx`
-- `components/typography/field.tsx`
-- `components/ui/button.tsx`
+- `@ds-kit/core`
 
 The kit contract currently centers on:
 
@@ -72,7 +32,7 @@ The kit contract currently centers on:
 - `Button` as the canonical interactive primitive
 - shared sizing/focus/invalid helpers in `components/typography/field.tsx`
 
-Do not broaden the install set unless the user asks.
+Do not bypass the registry by copying files unless the user explicitly asks for that.
 
 ## Modes
 
@@ -84,31 +44,33 @@ Use for requests like:
 
 - "install my ds kit here"
 - "set up my design system in this Next app"
-- "copy in `Text`, `Button`, and the token system"
+- "add `@ds-kit/core` to this app"
 
 Workflow:
 
 1. Inspect the target repo before editing.
-2. Verify the canonical source path exists.
-3. Check the target structure:
+2. Check the target structure:
    - whether `src/` exists
    - whether imports use `@/`
    - where global CSS is loaded
    - whether Tailwind 4 is in use
-4. Copy the V1 runtime install set into matching target folders.
-5. Adapt import paths only if the target repo requires it.
-6. Check integration assumptions and report follow-up work:
+3. Ensure shadcn is initialized.
+4. Add the `@ds-kit` registry entry if it is missing.
+5. Run `npx shadcn@latest add @ds-kit/core`.
+6. Ensure the global stylesheet entrypoint imports `styles/index.css`.
+7. Read `references/install-assumptions.md` and `references/install.md` if you need the exact caveats.
+8. Run `node <skill-dir>/scripts/post-add-ds-kit.mjs`.
+9. Run `node <skill-dir>/scripts/verify-install.mjs`.
+10. Check integration assumptions and report follow-up work:
    - dependencies
    - global stylesheet entrypoint
-   - font assets referenced in `styles/index.css`
    - alias differences
-7. Summarize exactly what was installed and any manual follow-up.
+11. Summarize exactly what was installed and any manual follow-up.
 
 Default behavior:
 
-- Prefer copying from the canonical ds-kit source rather than retyping files.
-- Preserve the kit folder structure in the target app.
-- Make the smallest integration edits needed for the copied files to work.
+- Prefer `shadcn add @ds-kit/core`.
+- Make the smallest integration edits needed after install.
 
 ### Audit
 
@@ -127,6 +89,8 @@ Audit for these conditions:
 - `Button` remains the canonical interactive primitive
 - `Button` and related components still use the shared sizing/focus contract rather than inventing parallel geometry
 
+Read `references/contract.md` when you need the precise contract wording.
+
 Findings should be concrete and path-based. Focus on drift, missing touchpoints, and parallel styling systems.
 
 ### Extend
@@ -138,51 +102,43 @@ Use for requests like:
 - "extend the text scale"
 - "rename a design token semantically"
 
-Before editing, identify all required touchpoints. For common changes:
+This mode is for extending a consuming app after the registry install, not for publishing ds-kit itself.
+
+Before editing, identify all required touchpoints. For common local changes:
 
 - new token:
-  - `styles/vars.css`
-  - `styles/index.css`
-  - `lib/classes.ts` if Tailwind merge awareness is needed
+  - local `styles/vars.css`
+  - local `styles/index.css`
+  - local `lib/classes.ts` if merge-sensitive utilities change
 - new typography semantic:
-  - `styles/index.css`
-  - `components/typography/text.tsx`
-  - `lib/classes.ts` if it creates new merge-sensitive utilities
+  - local `styles/index.css`
+  - local `components/typography/text.tsx`
+  - local `lib/classes.ts` if it creates new merge-sensitive utilities
 - new button semantic:
-  - `components/ui/button.tsx`
-  - supporting token/theme files if the variant depends on new semantics
+  - local `components/ui/button.tsx`
+  - local supporting token/theme files if the variant depends on new semantics
 - shared control sizing/state change:
-  - `components/typography/field.tsx`
-  - `components/ui/button.tsx`
+  - local `components/typography/field.tsx`
+  - local `components/ui/button.tsx`
 
 Prefer changing the token and contract layers first, then component variants.
 
-## Install notes
-
-The current ds-kit source includes lightweight docs:
-
-- `README.md`
-- `CONTRACT.md`
-- `PROMOTION-RULE.md`
-- `INSTALL-NOTES.md`
-- `references/dependencies.md`
-
-Read these when you need confirmation of scope or assumptions. Do not load extra files unless the task needs them.
+Read `references/contract.md` before changing merge-sensitive semantics.
 
 ## Guardrails
 
-- Treat ds-kit as copy-first source, not an npm package.
-- Do not generate a parallel design system from scratch when the kit should be copied.
+- Treat ds-kit as a registry install in consumer repos.
+- Do not switch to manual copy unless the user explicitly wants that.
 - Do not silently broaden the install with unrelated `ui/*` files.
 - Keep app-specific branding local unless the user explicitly wants to promote it back into ds-kit.
-- If a requested change seems foundational and reusable, say so and suggest promoting it back to the canonical ds-kit repo.
+- If a requested change seems foundational and reusable, suggest promoting it back to the ds-kit source repo.
 
 ## Output
 
 For install work, report:
 
-- source path used
-- files copied or updated
+- whether `@ds-kit` was configured
+- what `shadcn add` installed
 - integration assumptions checked
 - manual follow-up, if any
 
@@ -201,4 +157,4 @@ For extension work, report:
 
 - "Install my ds-kit into this Next app."
 - "Audit this repo against my ds-kit contract."
-- "Add a new semantic warning button variant and keep the merge rules aligned."
+- "Add `@ds-kit/core` and make sure globals are wired up."

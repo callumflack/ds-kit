@@ -24,6 +24,8 @@ coverage
 .env.development.local
 .env.test.local
 .env.production.local
+
+# Things I don't want available in the public repo!
 *.local
 
 # Logs
@@ -42,6 +44,11 @@ pnpm-debug.log*
 *.swp
 *.swo
 *~
+
+# Agents
+.cursor
+.claude
+.codex
 
 # OS
 .DS_Store

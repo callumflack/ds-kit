@@ -1,77 +1,75 @@
 # Design System Kit
 
-This repo is the canonical copy-first design-system foundation.
+This repo publishes a small shadcn registry for the reusable ds-kit foundation.
 
-It is intentionally small. V1 includes:
+`core` currently includes:
 
-- the token source in `styles/`
-- the Tailwind theme bridge in `styles/index.css`
-- the semantic `cn` merge policy in `lib/classes.ts`
-- the typography primitive in `components/typography/text.tsx`
-- the customized button primitive in `components/ui/button.tsx`
-- the shared field sizing and interaction helpers that button depends on in `components/typography/field.tsx`
+- the CSS token and theme layer in `src/styles/`
+- the merge-aware `cn()` policy in `src/lib/classes.ts`
+- the typography primitive in `src/components/typography/text.tsx`
+- the shared control geometry in `src/components/typography/field.tsx`
+- the interactive primitive in `src/components/ui/button.tsx`
 
-V1 intentionally excludes the broader form/control system, app wrappers, and product-specific convenience components.
+It intentionally does not try to ship a full app shell or a giant component catalog.
 
-## Repo layout
+In this source repo, `src/` is the canonical shipped runtime surface. Root-level files are repo-only.
 
-- `styles/`, `lib/`, and `components/` are the installable runtime surface.
-- `.vscode/settings.json` should be copied into consuming repos to suppress "Unknown at rule" warnings for Tailwind directives (`@apply`, `@theme`, etc.).
-- `skills/` contains the ds-kit skill used to install, audit, and extend the kit.
-- `references/` contains supporting notes such as dependency assumptions and source mapping.
-- `CONTRACT.md`, `PROMOTION-RULE.md`, and `INSTALL-NOTES.md` define the operating rules for the kit.
+## Install in another repo
 
-## How to use this repo
-
-Use this repo as the source of truth for the shared foundation.
-
-- Copy the runtime surface into a target app when starting a new project.
-- Use `skills/ds-kit/SKILL.md` to guide install, audit, and extension workflows.
-- Keep app-specific branding local unless it proves durable enough to promote back here.
-
-The goal is local ownership in each consuming repo without losing a clear canonical source.
-
-## Install this registry in another repo
-
-You can pull ds-kit components into any repo with the shadcn registry.
-
-1) Zero setup (works everywhere):
-
-`npx shadcn@latest add https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/core.json`
-
-2) Team setup (recommended):
-
-Do this once in the target repo:
-
-- `npx shadcn@latest init` (or configure at: `https://ui.shadcn.com/create` to get a custom install)
-- Then add this one block inside the existing file (don’t guess the rest):
+1. Initialize shadcn in the target repo.
+2. Add this registry entry to `components.json`:
 
 ```json
+{
   "registries": {
     "@ds-kit": "https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/{name}.json"
   }
+}
 ```
 
-Then install:
+3. Install the kit:
 
-`npx shadcn@latest add @ds-kit/core`
+```bash
+npx shadcn@latest add @ds-kit/core
+```
 
-What to install:
-- `core` is the current shipped registry item, so use `@ds-kit/core`.
+4. Make sure the target app imports `styles/index.css` from its global stylesheet entrypoint.
 
-Need more components later? Add new registry items and consume them as:
-`npx shadcn@latest add @ds-kit/<item-name>`.
+One-off install also works:
 
-Tailwind v4 note:
-- If your project is on Tailwind v4 (no `tailwind.config` file), `init` already sets `tailwind.config` to `""`.
-- If your project uses v3 config, point that field at `tailwind.config.js` or `tailwind.config.ts`.
+```bash
+npx shadcn@latest add https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/core.json
+```
 
-## Framework starter command
+## Source repo checks
 
-Usually I use [next.js](https://nextjs.org/docs/app/api-reference/cli/create-next-app):
+Before publishing registry changes from this repo:
 
-`pnpm create next-app --example "https://github.com/.../" [your-project-name]`
+```bash
+pnpm run registry:build
+pnpm run verify:registry-surface
+pnpm run verify:ds-kit
+pnpm run verify:tw-merge
+pnpm run ultracite:verify-setup
+```
 
-This command is the current goto:
+`verify:registry-surface` is the drift alarm between `src/` and `registry.json`.
+It fails when a shippable runtime file exists under `src/` but is not declared in the registry, or when `registry.json` points at a missing `src/` file.
 
-`pnpm create next-app [project-name] --biome --src-dir --use-pnpm --agents-md`
+## Docs
+
+Root docs govern the repo. They stay capitalized and at the top level because they define rules or workflows that shape the whole kit:
+
+- `CONTRACT.md`: the runtime contract across tokens, Tailwind aliases, merge rules, and canonical primitives
+- `REGISTRY-INSTALL.md`: the source-repo install and publish notes for shipping the kit through the registry
+
+`references/` is for supporting docs. These help with decisions or setup, but they do not define the repo's core contract:
+
+- `references/promotion-rule.md`: what belongs in ds-kit vs a consuming app
+- `references/install-assumptions.md`: the consumer app assumptions behind a working registry install
+
+## Skills
+
+- `skills/ds-kit/SKILL.md`: use in a consuming app to install or audit ds-kit via the registry
+  It carries its own bundled references in `skills/ds-kit/references/` and helper scripts in `skills/ds-kit/scripts/`.
+- `.agents/skills/ds-kit-registry-guardian/SKILL.md`: use in this source repo when changing `registry.json`, publishing items, or debugging install failures

@@ -1,0 +1,59 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * Keep token imports ordered:
+ * `vars.css` defines source values, `fluid-tokens.css` derives fluid token
+ * values, `semantic-tokens.css` maps them to ds-kit theme variables, and
+ * `tailwind-aliases.css` remaps Tailwind's default names onto those semantic
+ * tokens.
+ */
+@import "./vars.css";
+@import "./fluid-tokens.css";
+@import "./animations.css";
+@import "./utils.css";
+@import "./icons.css";
+@import "./semantic-tokens.css";
+@import "./tailwind-aliases.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Tailwnd base: global defaults below utilities */
+@layer base {
+  * {
+    scrollbar-width: thin;
+    @apply border-border outline-ring/50;
+  }
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    @apply border-border;
+  }
+  html {
+    @apply bg-background text-foreground;
+    @apply min-h-dvh;
+  }
+  body {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    /* transition everywhere: do NOT use tailwind's @apply here as the variables are inherited on every child transition */
+    transition:
+      color var(--motion-lg) var(--ease-standard),
+      opacity var(--motion-lg) var(--ease-standard);
+    @apply bg-muted text-foreground;
+    @apply text-body font-sans font-normal antialiased;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-muted-foreground;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}

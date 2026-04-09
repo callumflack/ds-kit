@@ -10,79 +10,91 @@
       "description": "Install the full ds-kit runtime (styles, utilities, typography, buttons, and shared elements).",
       "files": [
         {
-          "path": "styles/vars.css",
+          "path": "src/styles/vars.css",
           "type": "registry:style"
         },
         {
-          "path": "styles/utils.css",
+          "path": "src/styles/utils.css",
           "type": "registry:style"
         },
         {
-          "path": "styles/index.css",
+          "path": "src/styles/index.css",
           "type": "registry:style"
         },
         {
-          "path": "styles/animations.css",
+          "path": "src/styles/fluid-tokens.css",
           "type": "registry:style"
         },
         {
-          "path": "lib/classes.ts",
+          "path": "src/styles/semantic-tokens.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "src/styles/tailwind-aliases.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "src/styles/animations.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "src/styles/icons.css",
+          "type": "registry:style"
+        },
+        {
+          "path": "src/lib/classes.ts",
           "type": "registry:lib"
         },
         {
-          "path": "lib/utils.ts",
+          "path": "src/lib/utils.ts",
           "type": "registry:lib"
         },
         {
-          "path": "components/typography/control-states.ts",
+          "path": "src/components/typography/control-states.ts",
           "type": "registry:lib"
         },
         {
-          "path": "components/typography/field.tsx",
+          "path": "src/components/typography/field.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/typography/text.tsx",
+          "path": "src/components/typography/text.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/ui/button-base.tsx",
+          "path": "src/components/ui/button-base.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "components/ui/button.tsx",
+          "path": "src/components/ui/button.tsx",
           "type": "registry:ui"
         },
         {
-          "path": "components/elements/confirm-action.tsx",
+          "path": "src/components/elements/confirm-action.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/elements/dot-pattern.ts",
+          "path": "src/components/elements/dot-pattern.ts",
           "type": "registry:component"
         },
         {
-          "path": "components/elements/external-link.tsx",
+          "path": "src/components/elements/external-link.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/elements/page-loading-state.tsx",
+          "path": "src/components/elements/sliding-tabs.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/elements/sliding-tabs.tsx",
+          "path": "src/components/elements/spinner.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/elements/spinner.tsx",
+          "path": "src/components/elements/svg.tsx",
           "type": "registry:component"
         },
         {
-          "path": "components/elements/svg.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "components/elements/button-loading.tsx",
+          "path": "src/components/elements/button-loading.tsx",
           "type": "registry:component"
         }
       ]

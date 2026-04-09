@@ -1,0 +1,4 @@
+.lucide {
+  /* Generic icon styling. Lucide is just an example class; swap in whatever icon set you use. */
+  stroke-width: var(--lucide-stroke-width, var(--icon-stroke-width));
+}

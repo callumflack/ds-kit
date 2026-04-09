@@ -1,0 +1,59 @@
+:root {
+  /*
+   * Fluid interpolation step: 0px at <=500px, 1px at >=1200px.
+   * All tokens use calc(min + (range * var(--fluid-step))).
+   *
+   * Chrome 131 does not support the newer typed-arithmetic pattern that
+   * divides one length by another length to produce a unitless number:
+   *   (100vw - 500px) / 700px
+   *
+   * Keep the same DX, but store the step as a clamped 0px..1px length:
+   *   --fluid-step: max(0px, min(1px, calc((100vw - 500px) / 700)));
+   *
+   * Tokens then multiply by a unitless range:
+   *   calc(14px + (2 * var(--fluid-step)))
+   */
+  --fluid-step: max(0px, min(1px, calc((100vw - 500px) / 700)));
+
+  /* Text */
+  --fluid-text-pill: calc(9px + (1.5 * var(--fluid-step)));
+  --fluid-text-fine: calc(10px + (2.5 * var(--fluid-step)));
+  --fluid-text-compact: calc(11px + (2 * var(--fluid-step)));
+  --fluid-text-small: calc(12px + (3 * var(--fluid-step)));
+  --fluid-text-body: calc(14px + (2 * var(--fluid-step)));
+  --fluid-text-large: calc(15px + (2 * var(--fluid-step)));
+  --fluid-text-xlarge: calc(17px + (3 * var(--fluid-step)));
+  --fluid-text-heading: calc(18px + (4 * var(--fluid-step)));
+  --fluid-text-subtitle: calc(20px + (5 * var(--fluid-step)));
+  --fluid-text-title: calc(25px + (7 * var(--fluid-step)));
+  --fluid-text-display: calc(32px + (8 * var(--fluid-step)));
+  --fluid-text-hero: calc(40px + (10 * var(--fluid-step)));
+
+  /* Spacing: named */
+  --fluid-spacing-nav: calc(72px + (20 * var(--fluid-step)));
+  --fluid-spacing-header: calc(56px + (8 * var(--fluid-step)));
+  --fluid-spacing-banner: calc(24px + (8 * var(--fluid-step)));
+  --fluid-spacing-button-xs: calc(24px + (4 * var(--fluid-step)));
+  --fluid-spacing-tab: calc(44px + (10 * var(--fluid-step)));
+
+  /* Spacing: scale */
+  --fluid-spacing-w4: calc(10.5px + (5.5 * var(--fluid-step)));
+  --fluid-spacing-w5: calc(12px + (8 * var(--fluid-step)));
+  --fluid-spacing-w6: calc(16px + (8 * var(--fluid-step)));
+  --fluid-spacing-w7: calc(18px + (9 * var(--fluid-step)));
+  --fluid-spacing-w8: calc(21px + (11 * var(--fluid-step)));
+  --fluid-spacing-w10: calc(28px + (12 * var(--fluid-step)));
+  --fluid-spacing-w12: calc(32px + (16 * var(--fluid-step)));
+  --fluid-spacing-w16: calc(43px + (21 * var(--fluid-step)));
+  --fluid-spacing-w18: calc(48px + (23 * var(--fluid-step)));
+  --fluid-spacing-w20: calc(54px + (26 * var(--fluid-step)));
+  --fluid-spacing-w24: calc(64px + (32 * var(--fluid-step)));
+  --fluid-spacing-w28: calc(75px + (37 * var(--fluid-step)));
+  --fluid-spacing-w32: calc(85px + (43 * var(--fluid-step)));
+  --fluid-spacing-w36: calc(96px + (48 * var(--fluid-step)));
+  --fluid-spacing-w42: calc(112px + (56 * var(--fluid-step)));
+  --fluid-spacing-w48: calc(128px + (64 * var(--fluid-step)));
+  --fluid-spacing-w64: calc(171px + (85 * var(--fluid-step)));
+  --fluid-spacing-w72: calc(192px + (96 * var(--fluid-step)));
+  --fluid-spacing-w96: calc(256px + (128 * var(--fluid-step)));
+}
