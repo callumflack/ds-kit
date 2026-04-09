@@ -11,6 +11,7 @@ Use this skill to safely publish `ds-kit` updates as a shadcn registry and guard
 
 Keep the registry truthful and installable:
 - every changed runtime file is represented in `registry.json`
+- `src/` stays identical to the declared shipped surface in `registry.json`
 - every published item is buildable
 - package outputs are committed and publicly hostable
 - a consumer can run `npx shadcn@latest add @ds-kit/<item>` immediately
@@ -32,11 +33,12 @@ Before any publish:
 2. Identify changed files:
    - `git status --short`
 3. For every changed file under:
-   - `components/`, `lib/`, `styles/`
+   - `src/`
    check that path is already in `registry.json` (under the intended item’s `files[].path`).
 4. If a changed file is missing from `registry.json`, stop and add it.
 5. Keep `name` values stable and unique in `registry.json` (especially for existing items).
 6. Never hand-edit generated files in `public/r/` without rebuilding first.
+7. Run `pnpm run verify:registry-surface`.
 
 ## Registry layout assumption
 
@@ -51,27 +53,32 @@ If the repo adds separate components later, convert from single `core` to granul
 ## Publish workflow
 
 1. Implement change in source (`styles`, `lib`, `components`).
+   Source runtime lives under `src/`.
 2. Update `registry.json`:
    - add/update item in `items`
    - keep each file entry with `path` + `type`.
 3. Validate schema quickly:
    - required for changed entries: `name`, `type`, `title`, `description`, `files`
-4. Build registry payload:
+4. Verify the source/release boundary:
+   - `pnpm run verify:registry-surface`
+   This is the drift alarm between `src/` and `registry.json`.
+   It fails when a shippable runtime file exists under `src/` but is not declared in the registry, or when `registry.json` points at a missing `src/` file.
+5. Build registry payload:
    - `pnpm registry:build`
-5. Ensure outputs are present:
+6. Ensure outputs are present:
    - `public/r/core.json` exists for `core`
    - if itemized: `public/r/<item>.json` for each changed/added item
-6. Verify installability:
+7. Verify installability:
    - `pnpm registry:build` succeeded
    - no unresolved imports in generated files
-7. Add and commit:
+8. Add and commit:
    - `package.json` changes
    - `registry.json`
    - generated `public/r/*.json`
-8. Push to `main` or release branch.
-9. Publish/serve registry endpoint (GitHub Pages/Vercel), then ensure item URL resolves:
+9. Push to `main` or release branch.
+10. Publish/serve registry endpoint (GitHub Pages/Vercel), then ensure item URL resolves:
    - `https://<host>/r/<item>.json`
-10. Smoke check from a scratch repo:
+11. Smoke check from a scratch repo:
    - add to `components.json`:
      - `@ds-kit: "https://<host>/r/{name}.json"`
    - run `npx shadcn@latest add @ds-kit/core`
