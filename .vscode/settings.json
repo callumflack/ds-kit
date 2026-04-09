@@ -1,17 +1,20 @@
 {
-  // Workspace scope: overrides User. User can show "Default Formatter: None" while this folder still uses Biome.
   "css.lint.unknownAtRules": "ignore",
+  "tailwindCSS.experimental.configFile": "src/styles/index.css",
   "biome.enabled": true,
   "biome.configurationPath": "${workspaceFolder}/biome.json",
   "typescript.format.enable": false,
   "javascript.format.enable": false,
-  "prettier.enable": false,
+  "prettier.enable": true,
+  "prettier.requireConfig": true,
+  "emmet.showExpandedAbbreviation": "never",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.wordWrap": "wordWrapColumn",
   "editor.wordWrapColumn": 90,
   "editor.codeActionsOnSave": {
-    "source.organizeImports.biome": "explicit"
+    "source.organizeImports.biome": "explicit",
+    "source.fixAll.biome": "explicit"
   },
   "editor.defaultFormatter": "biomejs.biome",
   "[typescript]": {
@@ -45,5 +48,44 @@
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file"
+  },
+  "editor.formatOnPaste": true,
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
+  },
+  "[graphql]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[mdx]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "biomejs.biome"
   }
 }

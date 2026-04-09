@@ -1,9 +1,18 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "root": true,
   "files": {
-    "includes": ["**", "!**/.agents", "!**/references", "!**/node_modules", "!**/skills"]
+    "includes": [
+      "!**/.agents",
+      "!**/references",
+      "!**/node_modules",
+      "!**/skills"
+    ]
   },
   "css": {
+    "formatter": {
+      "enabled": true
+    },
     "parser": {
       "tailwindDirectives": true
     }
@@ -30,5 +39,10 @@
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2
-  }
+  },
+  "extends": [
+    "ultracite/biome/core",
+    "ultracite/biome/react",
+    "ultracite/biome/vitest"
+  ]
 }
