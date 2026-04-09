@@ -1,0 +1,11 @@
+{
+  "items": [
+    {
+      "name": "core",
+      "files": [
+        { "path": "src/styles/index.css", "type": "registry:style" },
+        { "path": "src/lib/utils.ts", "type": "registry:lib" }
+      ]
+    }
+  ]
+}
