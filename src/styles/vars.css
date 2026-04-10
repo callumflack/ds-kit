@@ -51,18 +51,18 @@
   --success-reversed: color-mix(in oklch, var(--success) 10%, white);
 
   /* Warning amber scale */
-  --warning: #d97706; /* based on tailwind amber-600 */
+  --warning: oklch(66.6% 0.179 58.318); /* tailwind amber-600 */
   --warning-foreground: color-mix(in oklch, var(--warning) 90%, black);
   --warning-reversed: color-mix(in oklch, var(--warning) 10%, white);
 
   /* Accents */
-  --odl-accent: oklch(0.5812 0.1716 253.66); /* #187adc */
-  --odl-gold: oklch(0.6941 0.0814 60.8); /* #C29168 */
-  --odl-panel: oklch(0.9668 0.0054 95.1); /* #F5F4F0 */
+  --accent-primary: oklch(0.5812 0.1716 253.66); /* #187adc */
+  --accent-secondary: oklch(0.6941 0.0814 60.8); /* #C29168 */
+  --accent-surface: oklch(0.9668 0.0054 95.1); /* #F5F4F0 */
 
   /* Accent blue scale (anchor: #4141fc):  */
   /* Made with: https://www.radix-ui.com/colors/custom */
-  --accent: oklch(0.4248 0.1505 290.12); /* #4141fc */
+  --accent-example: oklch(0.4248 0.1505 290.12); /* #4141fc */
   --accent-1: oklch(99.4% 0.0021 272);
   --accent-2: oklch(98.3% 0.011 272);
   --accent-3: oklch(96.1% 0.0234 272);
@@ -71,7 +71,7 @@
   --accent-6: oklch(86.3% 0.0973 272);
   --accent-7: oklch(80.7% 0.1185 272);
   --accent-8: oklch(73% 0.1547 272);
-  --accent-9: var(--accent);
+  --accent-9: var(--accent-example);
   --accent-10: oklch(46.8% 0.2357 272);
   --accent-11: oklch(51% 0.2357 272);
   --accent-12: oklch(31.3% 0.1173 272);

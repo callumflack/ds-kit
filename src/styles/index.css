@@ -44,8 +44,8 @@
     transition:
       color var(--motion-lg) var(--ease-standard),
       opacity var(--motion-lg) var(--ease-standard);
-    @apply bg-muted text-foreground;
-    @apply text-body font-sans font-normal antialiased;
+    @apply bg-background text-foreground;
+    @apply font-sans text-body font-normal antialiased;
   }
   input::placeholder,
   textarea::placeholder {

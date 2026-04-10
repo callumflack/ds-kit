@@ -200,8 +200,8 @@
   --color-accent-foreground: color-mix(in oklab, var(--odl-accent) 85%, black);
   --color-highlight: var(--odl-gold);
   --color-highlight-foreground: color-mix(in oklab, var(--odl-gold) 85%, black);
-  --color-panel: var(--odl-panel);
-  --color-panel-surface: color-mix(in oklab, var(--odl-panel) 30%, white);
+  --color-panel: var(--accent-surface);
+  --color-panel-subtle: color-mix(in oklab, var(--accent-surface) 30%, white);
 
   /* accent example using radix color tokens */
   --color-accent-canvas: var(--accent-1);
