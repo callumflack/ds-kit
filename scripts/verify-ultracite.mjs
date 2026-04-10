@@ -5,7 +5,7 @@ import { existsSync, readFileSync } from "node:fs";
 import {
   getSettingsValidationErrors,
   getThemeCssValidationErrors,
-} from "./lib/verify-ultracite-setup.mjs";
+} from "./lib/verify-ultracite.mjs";
 
 const settingsPath = ".vscode/settings.json";
 const extensionsPath = ".vscode/extensions.json";
@@ -41,7 +41,7 @@ for (const error of getThemeCssValidationErrors(themeCss, bridgeCss)) {
 
 try {
   execSync(
-    'pnpm exec prettier "src/styles/semantic-tokens.css" "src/styles/tailwind-aliases.css" --check --config .prettierrc.json',
+    'pnpm exec prettier "src/styles/semantic-tokens.css" "src/styles/tailwind-aliases.css" --check --config prettier.config.mjs',
     {
       stdio: "pipe",
     }

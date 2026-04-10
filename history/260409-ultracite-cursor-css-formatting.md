@@ -180,7 +180,7 @@ Current repo policy:
 - [`.vscode/settings.json`](/Users/cflack/Repos/callumflack/ds-kit/.vscode/settings.json)
 - [`.vscode/extensions.json`](/Users/cflack/Repos/callumflack/ds-kit/.vscode/extensions.json)
 - [`.prettierrc.json`](/Users/cflack/Repos/callumflack/ds-kit/.prettierrc.json)
-- [`scripts/verify-ultracite-setup.mjs`](/Users/cflack/Repos/callumflack/ds-kit/scripts/verify-ultracite-setup.mjs)
+- [`scripts/verify-ultracite.mjs`](/Users/cflack/Repos/callumflack/ds-kit/scripts/verify-ultracite.mjs)
 - [`README.md`](/Users/cflack/Repos/callumflack/ds-kit/README.md)
 - [`AGENTS.md`](/Users/cflack/Repos/callumflack/ds-kit/AGENTS.md)
 
