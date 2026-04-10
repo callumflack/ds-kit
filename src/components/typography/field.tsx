@@ -1,5 +1,11 @@
 import { cva } from "class-variance-authority";
-import { stateFocus, stateInvalid } from "./control-states";
+import {
+  stateFocus as controlStateFocus,
+  stateInvalid as controlStateInvalid,
+  TRIGGER_RING_STATE_PREFIXES as controlTriggerRingStatePrefixes,
+  triggerStateBordersFor as controlTriggerStateBordersFor,
+  triggerStateRingsFor as controlTriggerStateRingsFor,
+} from "./control-states";
 
 /**
  * Shared field/control geometry.
@@ -12,13 +18,11 @@ import { stateFocus, stateInvalid } from "./control-states";
  *   and re-exports them for field-oriented call sites.
  */
 
-export {
-  stateFocus,
-  stateInvalid,
-  TRIGGER_RING_STATE_PREFIXES,
-  triggerStateBordersFor,
-  triggerStateRingsFor,
-} from "./control-states";
+export const stateFocus = controlStateFocus;
+export const stateInvalid = controlStateInvalid;
+export const TRIGGER_RING_STATE_PREFIXES = controlTriggerRingStatePrefixes;
+export const triggerStateBordersFor = controlTriggerStateBordersFor;
+export const triggerStateRingsFor = controlTriggerStateRingsFor;
 
 export const fieldHeight = {
   xs: "h-button-xs", // 25px
@@ -40,8 +44,8 @@ export const fieldVariants = cva(
     // transitions
     "transition-[color,box-shadow]",
     // focus & validation states
-    ...stateFocus,
-    ...stateInvalid,
+    ...controlStateFocus,
+    ...controlStateInvalid,
     "outline-none",
     // disabled state
     "disabled:cursor-not-allowed disabled:opacity-50",

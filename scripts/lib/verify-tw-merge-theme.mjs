@@ -5,6 +5,7 @@ const CATEGORY_PREFIXES = {
   spacing: "--spacing-",
 };
 const LEADING_DIGIT_TOKEN = /^\d/;
+const VARIABLE_PATTERN = /--([a-z0-9-]+)\s*:/gi;
 
 const DEFAULT_SCALE_TOKENS = {
   text: new Set([
@@ -94,46 +95,69 @@ function extractBlock(source, openIndex) {
   return null;
 }
 
+function emptyThemeTokenSets() {
+  return {
+    text: new Set(),
+    radius: new Set(),
+    spacing: new Set(),
+  };
+}
+
+function parseThemeBlock(source, themeIndex, sourceLabel) {
+  const firstBraceIndex = source.indexOf("{", themeIndex);
+  if (firstBraceIndex === -1) {
+    throw new Error(`Malformed \`@theme\` block in ${sourceLabel}`);
+  }
+
+  const themeExtract = extractBlock(source, firstBraceIndex);
+  if (!themeExtract) {
+    throw new Error(`Unterminated \`@theme\` block in ${sourceLabel}`);
+  }
+
+  return themeExtract.block;
+}
+
+function classifyThemeToken(token) {
+  if (token.includes("*")) {
+    return null;
+  }
+
+  for (const category of CATEGORIES) {
+    const categoryPrefix = CATEGORY_PREFIXES[category].slice(2);
+    if (!token.startsWith(categoryPrefix)) {
+      continue;
+    }
+
+    const name = token.slice(categoryPrefix.length);
+    if (name.includes("--")) {
+      return null;
+    }
+
+    return { category, name };
+  }
+
+  return null;
+}
+
+function collectThemeTokens(block, found) {
+  for (const match of block.matchAll(VARIABLE_PATTERN)) {
+    const classified = classifyThemeToken(match[1]);
+    if (classified) {
+      found[classified.category].add(classified.name);
+    }
+  }
+}
+
 export function parseThemeTokens(fileContents, sourceLabel) {
   const themeMatches = [...fileContents.matchAll(/@theme\b/g)];
   if (themeMatches.length === 0) {
     throw new Error(`Could not find an \`@theme\` block in ${sourceLabel}`);
   }
-  const found = {
-    text: new Set(),
-    radius: new Set(),
-    spacing: new Set(),
-  };
 
+  const found = emptyThemeTokenSets();
   for (const themeMatch of themeMatches) {
-    const themeOpenIndex = themeMatch.index;
-    const firstBraceIndex = fileContents.indexOf("{", themeOpenIndex);
-    if (firstBraceIndex === -1) {
-      throw new Error(`Malformed \`@theme\` block in ${sourceLabel}`);
-    }
-
-    const themeExtract = extractBlock(fileContents, firstBraceIndex);
-    if (!themeExtract) {
-      throw new Error(`Unterminated \`@theme\` block in ${sourceLabel}`);
-    }
-
-    const variablePattern = /--([a-z0-9-]+)\s*:/gi;
-    for (const match of themeExtract.block.matchAll(variablePattern)) {
-      const token = match[1];
-      if (token.includes("*")) {
-        continue;
-      }
-
-      for (const category of CATEGORIES) {
-        const prefix = CATEGORY_PREFIXES[category];
-        if (token.startsWith(prefix.slice(2))) {
-          const name = token.slice(prefix.length - 2);
-          if (!name.includes("--")) {
-            found[category].add(name);
-          }
-        }
-      }
-    }
+    const block = parseThemeBlock(fileContents, themeMatch.index, sourceLabel);
+    collectThemeTokens(block, found);
   }
 
   return found;

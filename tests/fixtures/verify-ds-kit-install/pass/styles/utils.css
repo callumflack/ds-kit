@@ -1,2 +1,3 @@
-@layer utilities {
+@utility fixture {
+  opacity: 1;
 }
