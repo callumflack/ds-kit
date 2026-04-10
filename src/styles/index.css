@@ -19,7 +19,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Tailwnd base: global defaults below utilities */
+/* Tailwind base: global defaults below utilities */
 @layer base {
   * {
     scrollbar-width: thin;

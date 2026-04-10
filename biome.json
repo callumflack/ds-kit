@@ -4,41 +4,14 @@
   "files": {
     "includes": [
       "!**/.agents",
+      "!**/.claude",
+      "!**/.codex",
+      "!**/.cursor",
+      "!**/.local",
       "!**/references",
       "!**/node_modules",
       "!**/skills"
     ]
-  },
-  "css": {
-    "formatter": {
-      "enabled": true
-    },
-    "parser": {
-      "tailwindDirectives": true
-    }
-  },
-  "linter": {
-    "rules": {
-      "suspicious": {
-        "noUnknownAtRules": {
-          "options": {
-            "ignore": [
-              "apply",
-              "custom-variant",
-              "theme",
-              "utility",
-              "source",
-              "layer",
-              "tailwind"
-            ]
-          }
-        }
-      }
-    }
-  },
-  "formatter": {
-    "indentStyle": "space",
-    "indentWidth": 2
   },
   "extends": [
     "ultracite/biome/core",

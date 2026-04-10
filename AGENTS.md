@@ -29,15 +29,16 @@ After initializing or reinstalling Ultracite, run:
 
 This must pass before you start editing. It verifies:
 
-- Workspace formatter defaults point to Biome.
+- Workspace formatter defaults point to Prettier.
 - Language formatter overrides are present for TS/JS/JSON and CSS.
 - `.vscode` files are formatted consistently.
+- Prettier can parse the Tailwind-sensitive CSS files we rely on in Cursor.
 
 Formatter policy in this repo:
 
-- Use `Biome` as the default formatter for the repo surface.
+- Use stock Ultracite editor defaults, with one CSS exception for Cursor.
 - **Biome** stays in the repo for the main formatting and `Ultracite` linting path.
-- **VS Code / Cursor**: `[css]` uses `esbenp.prettier-vscode` with `editor.formatOnSave` enabled, while the rest of the workspace uses `biomejs.biome`. `pnpm run ultracite:verify-setup` regression-checks the sensitive Tailwind theme files against Prettier formatting so failed experiments don’t silently reintroduce broken CSS behavior.
+- **VS Code / Cursor**: root formatter fallback is `esbenp.prettier-vscode`, supported languages override back to `biomejs.biome`, and `[css]` stays on Prettier because Cursor was not reliably save-formatting this repo's Tailwind CSS with Biome. `pnpm run ultracite:verify-setup` keeps that setup pinned and runs `prettier --check` on the sensitive Tailwind theme files.
 
 ---
 
