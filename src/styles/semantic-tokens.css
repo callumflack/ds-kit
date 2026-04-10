@@ -132,6 +132,8 @@
   --spacing-panel: 520px;
   --spacing-container: 960px;
   --spacing-frame: 1000px;
+  /* Bridge prose token into Tailwind's max-width token namespace for `max-w-prose`. */
+  --max-width-prose: var(--spacing-prose);
 
   --spacing-nav: var(--fluid-spacing-nav);
   --spacing-header: var(--fluid-spacing-header);
@@ -168,7 +170,7 @@
 
   /* radius */
   --radius-soft: calc(var(--radius) / 3);
-  --radius-button: calc(var(--radius) - 4px);
+  --radius-button: calc(var(--radius) * 5 / 9);
   --radius-card: var(--radius);
   --radius-squish: calc(var(--radius) * 1.333);
   --radius-dialog: calc(var(--radius) * 2.667);
