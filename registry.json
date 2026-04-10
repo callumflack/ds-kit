@@ -58,6 +58,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        },
+        {
           "path": "src/components/ui/button-base.tsx",
           "type": "registry:ui"
         },
