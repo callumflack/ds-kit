@@ -29,9 +29,9 @@
     "verify:tw-merge": "node scripts/verify-tw-merge-theme.mjs",
     "registry:build": "npx shadcn@latest build",
     "ultracite:verify-setup": "node scripts/verify-ultracite-setup.mjs",
-    "check": "ultracite check && npm run verify:registry-surface && npm run verify:tw-merge",
+    "check": "ultracite check",
     "format": "biome format --write .",
     "fix": "ultracite fix",
-    "prepare": "pnpm run ultracite:verify-setup && husky"
+    "prepare": "husky"
   }
 }

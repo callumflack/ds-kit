@@ -16,6 +16,7 @@
   "extends": [
     "ultracite/biome/core",
     "ultracite/biome/react",
-    "ultracite/biome/vitest"
+    "ultracite/biome/vitest",
+    "ultracite/biome/next"
   ]
 }

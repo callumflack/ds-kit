@@ -1,8 +1,9 @@
 {
-  // Tailwind CSS v4 in CSS-first mode needs IntelliSense pointed at the real entry file.
   "tailwindCSS.experimental.configFile": "src/styles/index.css",
-  // Tailwind IntelliSense should understand class strings passed through our helpers.
-  "tailwindCSS.classFunctions": ["cva", "cn"],
+  "tailwindCSS.classFunctions": [
+    "cva",
+    "cn"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
@@ -31,9 +32,8 @@
   "[jsonc]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
-  // Cursor does not reliably save-format this repo's Tailwind CSS with Biome.
   "[css]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "biomejs.biome"
   },
   "[graphql]": {
     "editor.defaultFormatter": "biomejs.biome"
