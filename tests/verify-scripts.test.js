@@ -120,11 +120,18 @@ describe("verify scripts", () => {
 
   it("verify-ultracite-setup config logic passes for valid settings", () => {
     const settings = {
-      "editor.defaultFormatter": "biomejs.biome",
-      "biome.enabled": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnPaste": true,
+      "editor.formatOnSave": true,
+      "emmet.showExpandedAbbreviation": "never",
+      "js/ts.tsdk.path": "node_modules/typescript/lib",
+      "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.biome": "explicit",
+        "source.organizeImports.biome": "explicit",
+      },
       "tailwindCSS.experimental.configFile": "src/styles/index.css",
-      "prettier.enable": true,
-      "prettier.requireConfig": true,
+      "tailwindCSS.classFunctions": ["cva", "cn"],
       "[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
       "[typescriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
       "[javascript]": { "editor.defaultFormatter": "biomejs.biome" },
@@ -132,14 +139,6 @@ describe("verify scripts", () => {
       "[json]": { "editor.defaultFormatter": "biomejs.biome" },
       "[jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
       "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-      },
-      "[postcss]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-      },
-      "[tailwindcss]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
       },
@@ -154,20 +153,52 @@ describe("verify scripts", () => {
     const extensions = {
       recommendations: ["biomejs.biome", "esbenp.prettier-vscode"],
     };
+    expect(getSettingsValidationErrors(settings, extensions)).toEqual([]);
+  });
+
+  it("verify-ultracite-setup theme CSS logic passes for valid token files", () => {
     const themeCss = "@theme { --text-*: initial; --text-fine: 0.75rem; }";
     const bridgeCss = "@theme { --text-xs: var(--text-fine); }";
 
-    expect(getSettingsValidationErrors(settings, extensions)).toEqual([]);
     expect(getThemeCssValidationErrors(themeCss, bridgeCss)).toEqual([]);
+  });
+
+  it("verify-ultracite-setup theme CSS logic fails when text reset moves", () => {
+    const themeCss = "@theme { --text-fine: 0.75rem; --text-*: initial; }";
+    const bridgeCss = "@theme { --text-xs: var(--text-fine); }";
+
+    expect(
+      getThemeCssValidationErrors(themeCss, bridgeCss).some((error) =>
+        error.includes("moved --text-*: initial; below other --text-*")
+      )
+    ).toBe(true);
+  });
+
+  it("verify-ultracite-setup theme CSS logic fails on alias drift", () => {
+    const themeCss = "@theme { --text-*: initial; --text-fine: 0.75rem; }";
+    const bridgeCss = "@theme { --text-sm: var(--text-small); }";
+
+    expect(
+      getThemeCssValidationErrors(themeCss, bridgeCss).some((error) =>
+        error.includes("changed the Tailwind alias layer unexpectedly")
+      )
+    ).toBe(true);
   });
 
   it("verify-ultracite-setup config logic fails on bad Tailwind path", () => {
     const settings = {
-      "editor.defaultFormatter": "biomejs.biome",
-      "biome.enabled": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnPaste": true,
+      "editor.formatOnSave": true,
+      "emmet.showExpandedAbbreviation": "never",
+      "js/ts.tsdk.path": "node_modules/typescript/lib",
+      "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.biome": "explicit",
+        "source.organizeImports.biome": "explicit",
+      },
       "tailwindCSS.experimental.configFile": "styles/index.css",
-      "prettier.enable": true,
-      "prettier.requireConfig": true,
+      "tailwindCSS.classFunctions": ["cva", "cn"],
       "[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
       "[typescriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
       "[javascript]": { "editor.defaultFormatter": "biomejs.biome" },
@@ -175,14 +206,6 @@ describe("verify scripts", () => {
       "[json]": { "editor.defaultFormatter": "biomejs.biome" },
       "[jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
       "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-      },
-      "[postcss]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true,
-      },
-      "[tailwindcss]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
       },

@@ -5,9 +5,6 @@ export const languageFormatterBlocks = {
   "[javascriptreact]": "biomejs.biome",
   "[json]": "biomejs.biome",
   "[jsonc]": "biomejs.biome",
-  "[css]": "esbenp.prettier-vscode",
-  "[postcss]": "esbenp.prettier-vscode",
-  "[tailwindcss]": "esbenp.prettier-vscode",
   "[graphql]": "biomejs.biome",
   "[html]": "biomejs.biome",
   "[markdown]": "biomejs.biome",
@@ -17,19 +14,43 @@ export const languageFormatterBlocks = {
   "[yaml]": "biomejs.biome",
 };
 
+const textTokenPattern = /--text-(?!\*: initial;)[a-z0-9-]+\s*:/;
+
 export function getSettingsValidationErrors(settings, extensions) {
   const errors = [];
   const settingsPath = ".vscode/settings.json";
   const extensionsPath = ".vscode/extensions.json";
 
-  if (settings["editor.defaultFormatter"] !== "biomejs.biome") {
+  if (settings["editor.defaultFormatter"] !== "esbenp.prettier-vscode") {
     errors.push(
-      `${settingsPath} should set editor.defaultFormatter to "biomejs.biome", not "${settings["editor.defaultFormatter"]}"`
+      `${settingsPath} should set editor.defaultFormatter to "esbenp.prettier-vscode", not "${settings["editor.defaultFormatter"]}"`
     );
   }
 
-  if (settings["biome.enabled"] !== true) {
-    errors.push(`${settingsPath} should set biome.enabled to true`);
+  if (settings["editor.formatOnPaste"] !== true) {
+    errors.push(`${settingsPath} should set editor.formatOnPaste to true`);
+  }
+
+  if (settings["editor.formatOnSave"] !== true) {
+    errors.push(`${settingsPath} should set editor.formatOnSave to true`);
+  }
+
+  if (settings["emmet.showExpandedAbbreviation"] !== "never") {
+    errors.push(
+      `${settingsPath} should set emmet.showExpandedAbbreviation to "never"`
+    );
+  }
+
+  if (settings["js/ts.tsdk.path"] !== "node_modules/typescript/lib") {
+    errors.push(
+      `${settingsPath} should set js/ts.tsdk.path to "node_modules/typescript/lib"`
+    );
+  }
+
+  if (settings["js/ts.tsdk.promptToUseWorkspaceVersion"] !== true) {
+    errors.push(
+      `${settingsPath} should set js/ts.tsdk.promptToUseWorkspaceVersion to true`
+    );
   }
 
   if (
@@ -37,6 +58,15 @@ export function getSettingsValidationErrors(settings, extensions) {
   ) {
     errors.push(
       `${settingsPath} should set tailwindCSS.experimental.configFile to "src/styles/index.css" for Tailwind v4 CSS-first editor support`
+    );
+  }
+
+  if (
+    JSON.stringify(settings["tailwindCSS.classFunctions"]) !==
+    JSON.stringify(["cva", "cn"])
+  ) {
+    errors.push(
+      `${settingsPath} should set tailwindCSS.classFunctions to ["cva", "cn"]`
     );
   }
 
@@ -75,39 +105,23 @@ export function getSettingsValidationErrors(settings, extensions) {
     );
   }
 
-  const cssBlock = settings["[css]"];
-  if (!cssBlock || cssBlock["editor.formatOnSave"] !== true) {
-    errors.push(
-      `${settingsPath} [css] must set editor.formatOnSave to true so Cursor can save-format CSS with Prettier.`
-    );
-  }
-
-  if (cssBlock?.["editor.defaultFormatter"] !== "esbenp.prettier-vscode") {
+  if (
+    settings["[css]"]?.["editor.defaultFormatter"] !== "esbenp.prettier-vscode"
+  ) {
     errors.push(
       `${settingsPath} [css] must use esbenp.prettier-vscode as the CSS formatter`
     );
   }
 
-  for (const block of ["[postcss]", "[tailwindcss]"]) {
-    const cfg = settings[block];
-    if (!cfg || cfg["editor.defaultFormatter"] !== "esbenp.prettier-vscode") {
-      errors.push(
-        `${settingsPath} ${block} must use esbenp.prettier-vscode as the formatter`
-      );
-    }
-    if (cfg?.["editor.formatOnSave"] !== true) {
-      errors.push(
-        `${settingsPath} ${block} must set editor.formatOnSave to true`
-      );
-    }
-  }
-
-  if (settings["prettier.enable"] !== true) {
-    errors.push(`${settingsPath} should keep prettier.enable set to true`);
-  }
-
-  if (settings["prettier.requireConfig"] !== true) {
-    errors.push(`${settingsPath} should set prettier.requireConfig to true`);
+  if (
+    settings["editor.codeActionsOnSave"]?.["source.fixAll.biome"] !==
+      "explicit" ||
+    settings["editor.codeActionsOnSave"]?.["source.organizeImports.biome"] !==
+      "explicit"
+  ) {
+    errors.push(
+      `${settingsPath} should keep Biome fixAll and organizeImports code actions on save set to "explicit"`
+    );
   }
 
   return errors;
@@ -120,9 +134,7 @@ export function getThemeCssValidationErrors(
 ) {
   const errors = [];
   const resetIndex = themeCss.indexOf("--text-*: initial;");
-  const firstTextTokenIndex = themeCss.search(
-    /--text-(?!\*: initial;)[a-z0-9-]+\s*:/
-  );
+  const firstTextTokenIndex = themeCss.search(textTokenPattern);
 
   if (resetIndex === -1) {
     errors.push(
