@@ -45,7 +45,9 @@ async function fileExists(filePath) {
 }
 
 async function detectStylesDir() {
-  const componentsConfig = await readJsonIfExists(path.join(root, "components.json"));
+  const componentsConfig = await readJsonIfExists(
+    path.join(root, "components.json")
+  );
   const alias = componentsConfig?.aliases?.components;
   const sourceMode =
     typeof alias === "string"
@@ -53,7 +55,9 @@ async function detectStylesDir() {
       : existsSync(path.join(root, "src", "components")) &&
         !existsSync(path.join(root, "components"));
 
-  return sourceMode ? path.join(root, "src", "styles") : path.join(root, "styles");
+  return sourceMode
+    ? path.join(root, "src", "styles")
+    : path.join(root, "styles");
 }
 
 function normalizeImportPath(filePath) {
@@ -98,7 +102,11 @@ async function ensureImport(stylesDir) {
       return { entrypoint, importPath, status: "already-present" };
     }
 
-    await fs.writeFile(entrypoint, `@import "${importPath}";\n${content}`, "utf8");
+    await fs.writeFile(
+      entrypoint,
+      `@import "${importPath}";\n${content}`,
+      "utf8"
+    );
     return { entrypoint, importPath, status: "inserted" };
   }
 

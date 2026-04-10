@@ -34,7 +34,9 @@ const skipDirs = new Set([
 
 const styleAlias = (() => {
   try {
-    const config = JSON.parse(readFileSync(join(root, "components.json"), "utf8"));
+    const config = JSON.parse(
+      readFileSync(join(root, "components.json"), "utf8")
+    );
     return config?.aliases?.components ?? null;
   } catch {
     return null;
@@ -95,7 +97,9 @@ if (!sawStylesReference) {
   fail("No reference to styles/*.css found in app source");
 }
 
-const entrypoints = knownEntrypoints.filter((entry) => existsSync(join(root, entry)));
+const entrypoints = knownEntrypoints.filter((entry) =>
+  existsSync(join(root, entry))
+);
 if (entrypoints.length > 0) {
   const importedInEntrypoint = entrypoints.some((entrypoint) =>
     readFileSync(join(root, entrypoint), "utf8").includes("styles/index.css")
