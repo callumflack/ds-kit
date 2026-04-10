@@ -41,7 +41,7 @@ for (const error of getThemeCssValidationErrors(themeCss, bridgeCss)) {
 
 try {
   execSync(
-    'pnpm exec prettier "src/styles/semantic-tokens.css" "src/styles/tailwind-aliases.css" --check --config .prettierrc.json',
+    'pnpm exec prettier "src/styles/semantic-tokens.css" "src/styles/tailwind-aliases.css" --check --config prettier.config.mjs',
     {
       stdio: "pipe",
     }

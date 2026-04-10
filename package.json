@@ -9,6 +9,7 @@
     "husky": "^9.1.7",
     "lucide-react": "^0.511.0",
     "prettier": "^3.8.1",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "shadcn": "^3.8.5",
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.2",
