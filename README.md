@@ -41,6 +41,16 @@ One-off install also works:
 npx shadcn@latest add https://raw.githubusercontent.com/callumflack/ds-kit/main/public/r/core.json
 ```
 
+## Update in another repo
+
+Re-run the registry install:
+
+```bash
+npx shadcn@latest add @ds-kit/core
+```
+
+This repo is consumed as a shadcn registry item, not a package dependency, so updates are pulled by re-running `shadcn add`, then reviewing the diff.
+
 ## Source repo checks
 
 Before publishing registry changes from this repo:
