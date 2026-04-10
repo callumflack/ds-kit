@@ -22,10 +22,6 @@
           "type": "registry:style"
         },
         {
-          "path": "src/styles/fluid-tokens.css",
-          "type": "registry:style"
-        },
-        {
           "path": "src/styles/semantic-tokens.css",
           "type": "registry:style"
         },

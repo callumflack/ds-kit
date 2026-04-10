@@ -8,7 +8,6 @@ const STYLE_FILES = [
   "vars.css",
   "utils.css",
   "index.css",
-  "fluid-tokens.css",
   "semantic-tokens.css",
   "tailwind-aliases.css",
   "animations.css",
