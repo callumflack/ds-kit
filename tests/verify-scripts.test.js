@@ -10,7 +10,7 @@ import {
 import {
   getSettingsValidationErrors,
   getThemeCssValidationErrors,
-} from "../scripts/lib/verify-ultracite-setup.mjs";
+} from "../scripts/lib/verify-ultracite.mjs";
 import { createFixtureWorkspace, runScript } from "./helpers/run-script.js";
 
 const fixtureRoot = new URL("./fixtures/", import.meta.url);
@@ -118,7 +118,7 @@ describe("verify scripts", () => {
     });
   });
 
-  it("verify-ultracite-setup config logic passes for valid settings", () => {
+  it("verify-ultracite config logic passes for valid settings", () => {
     const settings = {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnPaste": true,
@@ -156,14 +156,14 @@ describe("verify scripts", () => {
     expect(getSettingsValidationErrors(settings, extensions)).toEqual([]);
   });
 
-  it("verify-ultracite-setup theme CSS logic passes for valid token files", () => {
+  it("verify-ultracite theme CSS logic passes for valid token files", () => {
     const themeCss = "@theme { --text-*: initial; --text-fine: 0.75rem; }";
     const bridgeCss = "@theme { --text-xs: var(--text-fine); }";
 
     expect(getThemeCssValidationErrors(themeCss, bridgeCss)).toEqual([]);
   });
 
-  it("verify-ultracite-setup theme CSS logic fails when text reset moves", () => {
+  it("verify-ultracite theme CSS logic fails when text reset moves", () => {
     const themeCss = "@theme { --text-fine: 0.75rem; --text-*: initial; }";
     const bridgeCss = "@theme { --text-xs: var(--text-fine); }";
 
@@ -174,7 +174,7 @@ describe("verify scripts", () => {
     ).toBe(true);
   });
 
-  it("verify-ultracite-setup theme CSS logic fails on alias drift", () => {
+  it("verify-ultracite theme CSS logic fails on alias drift", () => {
     const themeCss = "@theme { --text-*: initial; --text-fine: 0.75rem; }";
     const bridgeCss = "@theme { --text-sm: var(--text-small); }";
 
@@ -185,7 +185,7 @@ describe("verify scripts", () => {
     ).toBe(true);
   });
 
-  it("verify-ultracite-setup config logic fails on bad Tailwind path", () => {
+  it("verify-ultracite config logic fails on bad Tailwind path", () => {
     const settings = {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.formatOnPaste": true,

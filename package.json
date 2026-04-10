@@ -28,8 +28,8 @@
     "verify:registry-surface": "node scripts/verify-registry-surface.mjs",
     "verify:ds-kit": "node scripts/verify-ds-kit-install.mjs",
     "verify:tw-merge": "node scripts/verify-tw-merge-theme.mjs",
+    "verify:ultracite": "node scripts/verify-ultracite.mjs",
     "registry:build": "npx shadcn@latest build",
-    "ultracite:verify-setup": "node scripts/verify-ultracite-setup.mjs",
     "check": "ultracite check",
     "fix": "ultracite fix",
     "prepare": "husky"

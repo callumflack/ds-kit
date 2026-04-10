@@ -159,7 +159,7 @@ That means:
 
 ### Verification
 
-- `pnpm run ultracite:verify-setup` should stay small and non-mutating.
+- `pnpm run verify:ultracite` should stay small and non-mutating.
 - It exists to pin the agreed editor policy, not to implement a custom CSS test
   harness.
 

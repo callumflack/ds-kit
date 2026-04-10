@@ -60,7 +60,7 @@ pnpm run registry:build
 pnpm run verify:registry-surface
 pnpm run verify:ds-kit
 pnpm run verify:tw-merge
-pnpm run ultracite:verify-setup
+pnpm run verify:ultracite
 ```
 
 `verify:registry-surface` is the drift alarm between `src/` and `registry.json`.

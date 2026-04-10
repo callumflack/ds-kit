@@ -25,7 +25,7 @@ This project uses **Ultracite**, a zero-config preset that enforces strict code 
 
 After initializing or reinstalling Ultracite, run:
 
-- `pnpm run ultracite:verify-setup`
+- `pnpm run verify:ultracite`
 
 This must pass before you start editing. It verifies:
 
@@ -38,7 +38,7 @@ Formatter policy in this repo:
 
 - Use stock Ultracite editor defaults, with one CSS exception for Cursor.
 - **Biome** stays in the repo for the main formatting and `Ultracite` linting path.
-- **VS Code / Cursor**: root formatter fallback is `esbenp.prettier-vscode`, supported languages override back to `biomejs.biome`, and `[css]` stays on Prettier because Cursor was not reliably save-formatting this repo's Tailwind CSS with Biome. `pnpm run ultracite:verify-setup` keeps that setup pinned and runs `prettier --check` on the sensitive Tailwind theme files.
+- **VS Code / Cursor**: root formatter fallback is `esbenp.prettier-vscode`, supported languages override back to `biomejs.biome`, and `[css]` stays on Prettier because Cursor was not reliably save-formatting this repo's Tailwind CSS with Biome. `pnpm run verify:ultracite` keeps that setup pinned and runs `prettier --check` on the sensitive Tailwind theme files.
 
 ---
 
