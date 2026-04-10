@@ -31,7 +31,6 @@
     "registry:build": "npx shadcn@latest build",
     "ultracite:verify-setup": "node scripts/verify-ultracite-setup.mjs",
     "check": "ultracite check",
-    "format": "biome format --write .",
     "fix": "ultracite fix",
     "prepare": "husky"
   }
