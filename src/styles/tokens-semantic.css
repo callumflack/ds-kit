@@ -123,17 +123,17 @@
   --text-display--letter-spacing: -0.015em;
   --text-hero--letter-spacing: -0.02em;
 
+  /* widths: live in --container-* so they power max-w-*, w-*, and @container queries */
+  --container-prose: 65ch;
+  --container-panel: 520px;
+  --container-main: 960px;
+  --container-frame: 1000px;
+
   /* spacing */
   --spacing-em: 1em;
   --spacing-lh: 1lh;
   --spacing-inset: 24px; /* static for use with calc() */
   --spacing-button: 44px;
-  --spacing-prose: 65ch;
-  --spacing-panel: 520px;
-  --spacing-container: 960px;
-  --spacing-frame: 1000px;
-  /* Bridge prose token into Tailwind's max-width token namespace for `max-w-prose`. */
-  --max-width-prose: var(--spacing-prose);
 
   --spacing-nav: var(--fluid-spacing-nav);
   --spacing-header: var(--fluid-spacing-header);

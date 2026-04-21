@@ -15,7 +15,7 @@
 
 @utility container {
   @apply px-inset mx-auto w-full;
-  @apply max-w-container;
+  @apply max-w-main;
 }
 
 /* 
