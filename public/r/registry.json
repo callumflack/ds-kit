@@ -10,7 +10,7 @@
       "description": "Install the full ds-kit runtime (styles, utilities, typography, buttons, and shared elements).",
       "files": [
         {
-          "path": "src/styles/vars.css",
+          "path": "src/styles/tokens-primitive.css",
           "type": "registry:style"
         },
         {
@@ -22,7 +22,7 @@
           "type": "registry:style"
         },
         {
-          "path": "src/styles/semantic-tokens.css",
+          "path": "src/styles/tokens-semantic.css",
           "type": "registry:style"
         },
         {

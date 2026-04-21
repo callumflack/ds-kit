@@ -138,11 +138,11 @@ export function getThemeCssValidationErrors(
 
   if (resetIndex === -1) {
     errors.push(
-      `${label} lost the Tailwind text namespace reset in src/styles/semantic-tokens.css`
+      `${label} lost the Tailwind text namespace reset in src/styles/tokens-semantic.css`
     );
   } else if (firstTextTokenIndex !== -1 && resetIndex > firstTextTokenIndex) {
     errors.push(
-      `${label} moved --text-*: initial; below other --text-* declarations in src/styles/semantic-tokens.css`
+      `${label} moved --text-*: initial; below other --text-* declarations in src/styles/tokens-semantic.css`
     );
   }
 

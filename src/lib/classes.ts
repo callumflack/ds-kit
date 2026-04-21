@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
-// Keep in sync with `src/styles/semantic-tokens.css` + `src/styles/tailwind-aliases.css`.
+// Keep in sync with `src/styles/tokens-semantic.css` + `src/styles/tailwind-aliases.css`.
 // tailwind-merge v3 already treats color names broadly and t-shirt text/radius scales (xs…9xl);
 // extend only custom semantic text sizes, radii, and spacing keys not covered by defaults.
 const customTwMerge = extendTailwindMerge({

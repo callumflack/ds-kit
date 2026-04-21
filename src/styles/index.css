@@ -4,13 +4,13 @@
 
 /*
  * Keep token imports ordered:
- * `vars.css` defines source values, `semantic-tokens.css` derives fluid values
- * and maps them to ds-kit theme variables, `tailwind-aliases.css` remaps
- * Tailwind's default names onto those semantic tokens, and later files consume
- * that public token surface.
+ * `tokens-primitive.css` defines source values, `tokens-semantic.css` derives
+ * fluid values and maps them to ds-kit theme variables, `tailwind-aliases.css`
+ * remaps Tailwind's default names onto those semantic tokens, and later files
+ * consume that public token surface.
  */
-@import "./vars.css";
-@import "./semantic-tokens.css";
+@import "./tokens-primitive.css";
+@import "./tokens-semantic.css";
 @import "./tailwind-aliases.css";
 @import "./utils.css";
 @import "./icons.css";

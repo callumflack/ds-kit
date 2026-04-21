@@ -3,7 +3,7 @@
  * @see https://tailwindcss.com/docs/theme#default-theme-variable-reference
  *
  * Keep this file focused on Tailwind's default variable names. Semantic tokens
- * live in `semantic-tokens.css`.
+ * live in `tokens-semantic.css`.
  *
  * Import after the main `@theme inline` block so bridge overrides apply after
  * semantic defaults (e.g. `--text-base--line-height`).

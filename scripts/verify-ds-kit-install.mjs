@@ -5,10 +5,10 @@ import { extname, join } from "node:path";
 
 const ROOT = process.cwd();
 const STYLE_FILES = [
-  "vars.css",
+  "tokens-primitive.css",
   "utils.css",
   "index.css",
-  "semantic-tokens.css",
+  "tokens-semantic.css",
   "tailwind-aliases.css",
   "animations.css",
   "icons.css",

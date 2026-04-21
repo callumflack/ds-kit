@@ -40,9 +40,9 @@ Expected follow-up adaptation points:
 `ds-kit` is a layer on top of `shadcn` plus Tailwind, not a replacement for either.
 
 - `styles/index.css` keeps the shared Tailwind entry imports in one place.
-- `styles/semantic-tokens.css` owns the fluid primitives plus ds-kit semantic tokens.
+- `styles/tokens-semantic.css` owns the fluid primitives plus ds-kit semantic tokens.
 - `styles/tailwind-aliases.css` maps Tailwind's default variable names onto ds-kit semantic tokens.
-- Keep `--text-*: initial;` in its own `@theme` block inside `styles/semantic-tokens.css`; that is a deliberate guard against the Biome + Cursor CSS formatting bug documented in `history/260409-ultracite-cursor-css-formatting.md`.
+- Keep `--text-*: initial;` in its own `@theme` block inside `styles/tokens-semantic.css`; that is a deliberate guard against the Biome + Cursor CSS formatting bug documented in `history/260409-ultracite-cursor-css-formatting.md`.
 - Prefer semantic utilities like `text-*`, `bg-*`, `rounded-*`, and spacing aliases over direct `var(--token)` usage in app code.
-- Reach into `vars.css` when changing source values.
-- Extend `semantic-tokens.css` when the shared semantic API needs a new token.
+- Reach into `tokens-primitive.css` when changing source values.
+- Extend `tokens-semantic.css` when the shared semantic API needs a new token.

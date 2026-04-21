@@ -4,10 +4,10 @@ import { existsSync, promises as fs } from "node:fs";
 import path from "node:path";
 
 const STYLE_FILES = [
-  "vars.css",
+  "tokens-primitive.css",
   "utils.css",
   "index.css",
-  "semantic-tokens.css",
+  "tokens-semantic.css",
   "tailwind-aliases.css",
   "animations.css",
   "icons.css",

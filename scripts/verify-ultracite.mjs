@@ -28,7 +28,7 @@ if (!existsSync(extensionsPath)) {
 
 const settings = parseJsonc(settingsPath);
 const extensions = parseJsonc(extensionsPath);
-const themeCss = readFileSync("src/styles/semantic-tokens.css", "utf8");
+const themeCss = readFileSync("src/styles/tokens-semantic.css", "utf8");
 const bridgeCss = readFileSync("src/styles/tailwind-aliases.css", "utf8");
 
 for (const error of getSettingsValidationErrors(settings, extensions)) {
@@ -41,7 +41,7 @@ for (const error of getThemeCssValidationErrors(themeCss, bridgeCss)) {
 
 try {
   execSync(
-    'pnpm exec prettier "src/styles/semantic-tokens.css" "src/styles/tailwind-aliases.css" --check --config prettier.config.mjs',
+    'pnpm exec prettier "src/styles/tokens-semantic.css" "src/styles/tailwind-aliases.css" --check --config prettier.config.mjs',
     {
       stdio: "pipe",
     }

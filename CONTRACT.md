@@ -2,7 +2,7 @@
 
 The kit is portable because these layers stay aligned:
 
-- Semantic tokens are authored in CSS variables first, primarily in `styles/vars.css`.
+- Semantic tokens are authored in CSS variables first, primarily in `styles/tokens-primitive.css`.
 - Tailwind-facing semantic aliases are mapped in `styles/index.css`.
 - Any semantic utility namespace that can conflict in Tailwind class merging (`text`, `radius`, `spacing`) must be registered in `lib/classes.ts`.
 - `components/typography/text.tsx` is the canonical typography primitive.

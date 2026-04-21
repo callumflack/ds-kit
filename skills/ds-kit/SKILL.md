@@ -107,7 +107,7 @@ This mode is for extending a consuming app after the registry install, not for p
 Before editing, identify all required touchpoints. For common local changes:
 
 - new token:
-  - local `styles/vars.css`
+  - local `styles/tokens-primitive.css`
   - local `styles/index.css`
   - local `lib/classes.ts` if merge-sensitive utilities change
 - new typography semantic:

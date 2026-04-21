@@ -61,7 +61,7 @@ describe("verify scripts", () => {
     const workspace = useFixture("verify-ds-kit-install/pass");
     writeFileSync(
       join(workspace, "app/globals.css"),
-      '@import "../styles/vars.css";\n'
+      '@import "../styles/tokens-primitive.css";\n'
     );
 
     const result = runScript("scripts/verify-ds-kit-install.mjs", workspace);

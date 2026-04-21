@@ -18,7 +18,7 @@ function fail(message) {
 }
 const ROOT = process.cwd();
 const THEME_SOURCE_PATHS = [
-  join(ROOT, "src/styles/semantic-tokens.css"),
+  join(ROOT, "src/styles/tokens-semantic.css"),
   join(ROOT, "src/styles/tailwind-aliases.css"),
 ];
 const CLASSES_PATH = join(ROOT, "src/lib/classes.ts");
@@ -64,7 +64,7 @@ try {
     console.log(line);
   }
   fail(
-    "Tailwind merge tokens are out of sync with theme variables. Update src/styles/semantic-tokens.css, src/styles/tailwind-aliases.css, and src/lib/classes.ts together."
+    "Tailwind merge tokens are out of sync with theme variables. Update src/styles/tokens-semantic.css, src/styles/tailwind-aliases.css, and src/lib/classes.ts together."
   );
 } catch (error) {
   fail(error instanceof Error ? error.message : String(error));
