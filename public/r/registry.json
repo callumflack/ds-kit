@@ -22,6 +22,10 @@
           "type": "registry:style"
         },
         {
+          "path": "src/styles/base.css",
+          "type": "registry:style"
+        },
+        {
           "path": "src/styles/tokens-semantic.css",
           "type": "registry:style"
         },
@@ -58,10 +62,6 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/ui/alert-dialog.tsx",
-          "type": "registry:ui"
-        },
-        {
           "path": "src/components/ui/button-base.tsx",
           "type": "registry:ui"
         },
@@ -70,31 +70,11 @@
           "type": "registry:ui"
         },
         {
-          "path": "src/components/elements/confirm-action.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/elements/dot-pattern.ts",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/elements/external-link.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/elements/sliding-tabs.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/elements/spinner.tsx",
           "type": "registry:component"
         },
         {
           "path": "src/components/elements/svg.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/elements/button-loading.tsx",
           "type": "registry:component"
         }
       ]
