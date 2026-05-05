@@ -12,48 +12,9 @@
 @import "./tokens-primitive.css";
 @import "./tokens-semantic.css";
 @import "./tailwind-aliases.css";
+@import "./base.css";
 @import "./utils.css";
 @import "./icons.css";
 @import "./animations.css";
 
 @custom-variant dark (&:is(.dark *));
-
-/* Tailwind base: global defaults below utilities */
-@layer base {
-  * {
-    scrollbar-width: thin;
-    @apply border-border outline-ring/50;
-  }
-  ::selection {
-    @apply bg-foreground text-background;
-  }
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    @apply border-border;
-  }
-  html {
-    @apply bg-background text-foreground;
-    @apply min-h-dvh;
-  }
-  body {
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    /* transition everywhere: do NOT use tailwind's @apply here as the variables are inherited on every child transition */
-    transition:
-      color var(--motion-lg) var(--ease-standard),
-      opacity var(--motion-lg) var(--ease-standard);
-    @apply bg-background text-foreground;
-    @apply font-sans text-body font-normal antialiased;
-    @apply h-full min-h-dvh;
-  }
-  input::placeholder,
-  textarea::placeholder {
-    @apply text-muted-foreground;
-  }
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
-    @apply cursor-pointer;
-  }
-}
