@@ -24,8 +24,8 @@
   --fluid-text-pill: calc(9px + (1.5 * var(--fluid-step)));
   --fluid-text-fine: calc(10px + (2.5 * var(--fluid-step)));
   --fluid-text-compact: calc(11px + (2 * var(--fluid-step)));
-  --fluid-text-small: calc(12px + (3 * var(--fluid-step)));
-  --fluid-text-body: calc(14px + (2 * var(--fluid-step)));
+  --fluid-text-small: calc(12px + (2 * var(--fluid-step)));
+  --fluid-text-body: calc(13px + (2 * var(--fluid-step)));
   --fluid-text-large: calc(15px + (2 * var(--fluid-step)));
   --fluid-text-xlarge: calc(17px + (3 * var(--fluid-step)));
   --fluid-text-heading: calc(18px + (4 * var(--fluid-step)));
@@ -33,6 +33,34 @@
   --fluid-text-title: calc(25px + (7 * var(--fluid-step)));
   --fluid-text-display: calc(32px + (8 * var(--fluid-step)));
   --fluid-text-hero: calc(40px + (10 * var(--fluid-step)));
+
+  /*
+   * Fluid text guide:
+   * - `text-*` utilities read `--semantic-text-*`.
+   * - `--semantic-text-*` is fixed by default.
+   * - `.fluid-text` or `[data-fluid-text]` remaps it to `--fluid-text-*`.
+   *
+   * Example:
+   *   <main>
+   *     <p class="text-body">fixed 13px</p>
+   *   </main>
+   *
+   *   <main data-fluid-text>
+   *     <p class="text-body">fluid 13px -> 15px</p>
+   *   </main>
+   */
+  --semantic-text-pill: 9px;
+  --semantic-text-fine: 10px;
+  --semantic-text-compact: 11px;
+  --semantic-text-small: 12px;
+  --semantic-text-body: 13px;
+  --semantic-text-large: 15px;
+  --semantic-text-xlarge: 17px;
+  --semantic-text-heading: 18px;
+  --semantic-text-subtitle: 20px;
+  --semantic-text-title: 25px;
+  --semantic-text-display: 32px;
+  --semantic-text-hero: 40px;
 
   /* Spacing: named */
   --fluid-spacing-nav: calc(72px + (20 * var(--fluid-step)));
@@ -63,6 +91,21 @@
   --fluid-spacing-w96: calc(256px + (128 * var(--fluid-step)));
 }
 
+:where(.fluid-text, [data-fluid-text]) {
+  --semantic-text-pill: var(--fluid-text-pill);
+  --semantic-text-fine: var(--fluid-text-fine);
+  --semantic-text-compact: var(--fluid-text-compact);
+  --semantic-text-small: var(--fluid-text-small);
+  --semantic-text-body: var(--fluid-text-body);
+  --semantic-text-large: var(--fluid-text-large);
+  --semantic-text-xlarge: var(--fluid-text-xlarge);
+  --semantic-text-heading: var(--fluid-text-heading);
+  --semantic-text-subtitle: var(--fluid-text-subtitle);
+  --semantic-text-title: var(--fluid-text-title);
+  --semantic-text-display: var(--fluid-text-display);
+  --semantic-text-hero: var(--fluid-text-hero);
+}
+
 /*
   NB! Use "inline" when defining theme variables that reference other variables:
   https://tailwindcss.com/docs/theme#using-your-theme-variables
@@ -80,19 +123,19 @@
 
 @theme inline {
   /* text size */
-  --text-pill: var(--fluid-text-pill);
-  --text-fine: var(--fluid-text-fine);
-  --text-compact: var(--fluid-text-compact);
-  --text-small: var(--fluid-text-small);
-  --text-body: var(--fluid-text-body);
+  --text-pill: var(--semantic-text-pill);
+  --text-fine: var(--semantic-text-fine);
+  --text-compact: var(--semantic-text-compact);
+  --text-small: var(--semantic-text-small);
+  --text-body: var(--semantic-text-body);
   --text-button: 16px; /* keep controls at 16px to avoid iOS form zoom */
-  --text-large: var(--fluid-text-large);
-  --text-xlarge: var(--fluid-text-xlarge);
-  --text-heading: var(--fluid-text-heading);
-  --text-subtitle: var(--fluid-text-subtitle);
-  --text-title: var(--fluid-text-title);
-  --text-display: var(--fluid-text-display);
-  --text-hero: var(--fluid-text-hero);
+  --text-large: var(--semantic-text-large);
+  --text-xlarge: var(--semantic-text-xlarge);
+  --text-heading: var(--semantic-text-heading);
+  --text-subtitle: var(--semantic-text-subtitle);
+  --text-title: var(--semantic-text-title);
+  --text-display: var(--semantic-text-display);
+  --text-hero: var(--semantic-text-hero);
 
   /* text line-height */
   --default-line-height: calc(24 / 17);
