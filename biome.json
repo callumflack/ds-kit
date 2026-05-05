@@ -10,7 +10,10 @@
       "!**/.local",
       "!**/references",
       "!**/node_modules",
-      "!**/skills"
+      "!**/skills",
+      "!ODL-DS",
+      "!agent-browser-main",
+      "!**/*.css"
     ]
   },
   "extends": [

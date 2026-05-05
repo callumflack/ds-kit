@@ -9,6 +9,7 @@
   "emmet.showExpandedAbbreviation": "never",
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+  "biome.configurationPath": "biome.json",
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",
     "source.organizeImports.biome": "explicit"
@@ -33,6 +34,9 @@
   },
   // Cursor does not reliably save-format this repo's Tailwind CSS with Biome.
   "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[postcss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[graphql]": {

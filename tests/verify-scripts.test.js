@@ -142,6 +142,7 @@ describe("verify scripts", () => {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true,
       },
+      "[postcss]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
       "[graphql]": { "editor.defaultFormatter": "biomejs.biome" },
       "[html]": { "editor.defaultFormatter": "biomejs.biome" },
       "[markdown]": { "editor.defaultFormatter": "biomejs.biome" },

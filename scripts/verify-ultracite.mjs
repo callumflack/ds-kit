@@ -28,6 +28,7 @@ if (!existsSync(extensionsPath)) {
 
 const settings = parseJsonc(settingsPath);
 const extensions = parseJsonc(extensionsPath);
+const biome = parseJsonc("biome.json");
 const themeCss = readFileSync("src/styles/tokens-semantic.css", "utf8");
 const bridgeCss = readFileSync("src/styles/tailwind-aliases.css", "utf8");
 
@@ -37,6 +38,18 @@ for (const error of getSettingsValidationErrors(settings, extensions)) {
 
 for (const error of getThemeCssValidationErrors(themeCss, bridgeCss)) {
   fail(error);
+}
+
+if (!biome.extends?.includes("ultracite/biome/core")) {
+  fail("biome.json must extend ultracite/biome/core");
+}
+
+if (!biome.files?.includes?.includes("!**/*.css")) {
+  fail("biome.json must exclude CSS so Prettier owns CSS formatting");
+}
+
+if (existsSync("docs/biome.json")) {
+  fail("docs/biome.json must not exist; root Ultracite must own docs TSX");
 }
 
 try {

@@ -38,8 +38,10 @@
     "verify:tw-merge": "node scripts/verify-tw-merge-theme.mjs",
     "verify:ultracite": "node scripts/verify-ultracite.mjs",
     "registry:build": "npx shadcn@latest build",
-    "check": "pnpm run check:types && ultracite check",
-    "fix": "ultracite fix",
+    "check": "pnpm run check:types && ultracite check && pnpm run lint:css",
+    "lint:css": "prettier --check \"src/styles/**/*.css\"",
+    "fix": "ultracite fix && pnpm run format:css",
+    "format:css": "prettier --write \"src/styles/**/*.css\"",
     "doctor": "ultracite doctor",
     "prepare": "husky"
   }

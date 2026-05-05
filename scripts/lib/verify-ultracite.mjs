@@ -114,6 +114,15 @@ export function getSettingsValidationErrors(settings, extensions) {
   }
 
   if (
+    settings["[postcss]"]?.["editor.defaultFormatter"] !==
+    "esbenp.prettier-vscode"
+  ) {
+    errors.push(
+      `${settingsPath} [postcss] must use esbenp.prettier-vscode as the PostCSS formatter`
+    );
+  }
+
+  if (
     settings["editor.codeActionsOnSave"]?.["source.fixAll.biome"] !==
       "explicit" ||
     settings["editor.codeActionsOnSave"]?.["source.organizeImports.biome"] !==
